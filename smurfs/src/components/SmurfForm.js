@@ -3,14 +3,14 @@ import { SmurfContext } from "../contexts/SmurfContext";
 import axios from 'axios';
 
 const SmurfForm = props => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({name: '', age: '', height: ''});
   const setLastUpdate = useContext(SmurfContext);
 
   const addData = (event) => {
     setData({...data, [event.target.name]: event.target.value});
   };
   const clearData = () => {
-    setData({});
+    setData({name: '', age: '', height: ''});
   };
   const submitData = (e) => {
     e.preventDefault();
@@ -19,6 +19,7 @@ const SmurfForm = props => {
       const res = await axios.post('http://localhost:3333/smurfs', data);
     };
     postData();
+    clearData();
     setLastUpdate(Date.now());
   };
 
